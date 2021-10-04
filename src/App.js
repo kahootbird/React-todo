@@ -1,10 +1,16 @@
-//import logo from './logo.svg';
+import logo from './logo.svg';
 import './App.css';
+import Component1 from './components/Component1'
+
 
 function App() {
   return (
-    <h1>Todo App</h1>
+    <div className="App">
+      <header className="App-header">
+        Hello, World!
+        <Component1 title='Hello' />
+      </header>
+    </div>
   );
 }
-
 export default App;
