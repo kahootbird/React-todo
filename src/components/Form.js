@@ -1,29 +1,49 @@
-import React from 'react'
+import React, { useState }  from 'react'
+import { v4 as uuidv4 } from 'uuid';
+const Form = ({addTodo}) => {
 
-const Form = ({setInputText}) => {
   const inputTextHandler = (e) => {
-    console.log(e.target.value)
-    console.log(e)
-    setInputText(e.target.value)
-  }
+}
+
+  const [todo, setTodo] = useState({
+    id: "",
+    task: "",
+    completed: false
+  });
+
+
   function handleSubmit(event) {
     event.preventDefault();
     //alert('A name was submitted: ' + this.event.value);
     console.log("VALUE SUBMITTED")
+    console.log(event.value)
+    if (todo.task.trim())
+    {
+      addTodo({ ...todo, id: uuidv4()   })
+      //reset form
+      setTodo({ ...todo, task: ""})
+      console.log("DATA HERE" + todo.task)
+    }
     //event.preventDefault();
+
+
   }
+  function handleTaskInputChange(e) {
+    setTodo({ ...todo, task: e.target.value});
+  }
+
   return (
     <div>FormData
-    <fieldset>
-       <label>
-         <p>Name</p>
-         <input name="name" />
-       </label>
-     </fieldset>
-
-    <button onClick={handleSubmit} >
-
-    </button>
+    <form onSubmit={handleSubmit}>
+    <input
+    name="task"
+    type="text"
+    value={todo.task}
+    onChange={handleTaskInputChange}
+     />
+    <button />
+    </form>
+    Okz
     </div>
 
   )
@@ -31,7 +51,18 @@ const Form = ({setInputText}) => {
 
 export default Form
 
+/*
+<fieldset>
+   <label>
+     <p>Name</p>
+     <input name="name" />
+   </label>
+ </fieldset>
 
+<button onClick={handleSubmit} >
+
+</button>
+*/
 /*
 //import React from 'react'
 
