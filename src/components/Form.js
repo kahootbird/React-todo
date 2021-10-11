@@ -12,25 +12,20 @@ const Form = ({addTodo}) => {
   });
 
 
-  function handleSubmit(event) {
-    event.preventDefault();
-    //alert('A name was submitted: ' + this.event.value);
-    console.log("VALUE SUBMITTED")
-    console.log(event.value)
-    if (todo.task.trim())
-    {
-      addTodo({ ...todo, id: uuidv4()   })
-      //reset form
-      setTodo({ ...todo, task: ""})
-      console.log("DATA HERE" + todo.task)
+    function handleTaskInputChange(e) {
+      // e.target.value contains new input from onChange
+      // event for input elements
+      setTodo({ ...todo, task: e.target.value });
     }
-    //event.preventDefault();
 
-
-  }
-  function handleTaskInputChange(e) {
-    setTodo({ ...todo, task: e.target.value});
-  }
+    function handleSubmit(e) {
+      e.preventDefault(); // prevents browser refresh
+      // trim() gets rid of string whitespace
+      if (todo.task.trim()) {
+        addTodo({ ...todo, id: uuidv4() });
+        setTodo({ ...todo, task: "" });
+      }
+    }
 
   return (
     <div>FormData

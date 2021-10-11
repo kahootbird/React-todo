@@ -3,8 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 import Form from "./components/Form"
 import Component1 from './components/Component1'
-import Todo1 from './components/Todo1'
-//import Todo1 from './components/Todo1'
+//import Todo from './components/Todo'
+import TodoList from './components/TodoList'
+//import Todo from './components/Todo'
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -13,6 +14,27 @@ function App() {
   {
     setTodos([todo, ...todos])
   }
+  function removeTodo(id) {
+   setTodos(todos.filter(todo => todo.id !== id));
+ }
+ function addTodo(todo) {
+  // adds new todo to beginning of todos array
+  setTodos([todo, ...todos]);
+}
+
+function toggleComplete(id) {
+  setTodos(
+    todos.map(todo => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
+      }
+      return todo;
+    })
+  );
+}
   //const [todos, setTodos] = useState("");
 
 /*
@@ -28,8 +50,13 @@ function App() {
       <header className="App-header">
         Todo List
         <Component1 title='Hello From Title Prop' />
-        <Todo1 addTodo={addTodo} />
-        <Form />
+        <Form addTodo={addTodo}/>
+        <TodoList
+        todos={todos}
+        removeTodo={removeTodo}
+        toggleComplete={toggleComplete}
+        />
+
 
 
       </header>
